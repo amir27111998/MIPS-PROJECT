@@ -1,20 +1,38 @@
+#############################################
+############## GROUP MEMBERS ################
+
+#	SYED AAMIR ALI : CS-023             #
+#	UMAIS BHATTI   : CS-046             #
+
+#############################################
+
 .data 
 # Data declaration section
 _msg0: .asciiz "Unsorted Array"
 _msg1: .asciiz "Sorted Array"
 _newline: .asciiz "\n"
 _spaces: .asciiz " "
+msg0: .asciiz "###### Negative Numbers Will Exit Input Console ######"
 msg1: .asciiz "Enter the number of elements: "
 msg2: .asciiz "Enter elements: "
 msg3: .asciiz "Performing MergeSort........ "
 
 
-Array1: .word 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Array2: .word 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Array1: .word 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+Array2: .word 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 
 .text
 .globl main
 main:
+
+li $v0,4
+la $a0,msg0
+syscall
+
+li $v0,4
+la $a0,_newline
+syscall
+
 
 jal input
 
@@ -310,6 +328,8 @@ bge $a0,$v1,Exxx
 li $v0,5
 syscall
 
+blt $v0,$0,Exxx
+
 sw $v0,Array1($s1)
 
 sw $0,Array2($s1)
@@ -320,6 +340,10 @@ addi $a0,$a0,1
 j while_input
 
 Exxx:
+# exit number of elements subtract from input
+sub $a0,$v1,$a0   
+sub $v1,$v1,$a0 
+
 li $a0,0
 li $s1,0
 li $v0,0
